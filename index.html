@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scanner QR con Sovrapposizione</title>
-    <script src="https://unpkg.com/html5-qrcode" defer></script>
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js" defer></script>
     <style>
         body {
             margin: 0;
@@ -55,15 +55,19 @@
             return;
         }
 
-        function onScanSuccess(decodedText) {
+        // Funzione di successo della scansione
+        function onScanSuccess(decodedText, decodedResult) {
+            console.log("QR Code scansionato:", decodedText); // Debugging: log del QR scansionato
             infoBox.innerHTML = `<strong>QR Code Scansionato:</strong><br>${decodedText}`;
             infoBox.style.display = "block";
         }
 
+        // Funzione di errore della scansione
         function onScanFailure(error) {
-            console.warn(`Errore scansione: ${error}`);
+            console.warn(`Errore scansione: ${error}`); // Aggiungi debug in caso di errore
         }
 
+        // Inizializza il lettore QR
         let html5QrcodeScanner = new Html5QrcodeScanner(
             "reader", 
             { fps: 10, qrbox: 250 }
